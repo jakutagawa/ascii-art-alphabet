@@ -9,7 +9,7 @@ var lineNum = 0
 var letterArray = [];
 var asciiArray = [];
 var colNum = 0;
-var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+var alphabet = ' 0123456789abcdefghijklmnopqrstuvwxyz'.split('');
 
 // needed for loading text file
 var fs = require('fs');
@@ -17,7 +17,6 @@ var readline = require('readline');
 
 convertWord(callback => {
     array = callback
-
     var rowArray = ['', '', '', '', '', '', '', '', '', '', '', '']
     // converts entire string to lowercase
     var lowerCapWordInput = wordInput.toLowerCase();
@@ -78,7 +77,7 @@ function convertWord(callback) {
             }
         }
     })
-    // sends font library back
+    // sends loaded font library back
     fontfile.on('close', function() {
         callback(asciiArray)
     });

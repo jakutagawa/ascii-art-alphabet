@@ -5,7 +5,7 @@ var wordInput = process.argv[2];
 console.log('You entered ' + wordInput);
 
 // instantiates counters and empty arrays
-var lineNum = 0
+var lineNum = 0;
 var letterArray = [];
 var asciiArray = [];
 var colNum = 0;
@@ -17,27 +17,41 @@ var readline = require('readline');
 
 convertWord(callback => {
     array = callback
-    var rowArray = ['', '', '', '', '', '', '', '', '', '', '', '']
+    var rowArray = ['', '', '', '', '', '', '', '', '', '', '', ''];
     // converts entire string to lowercase
     var lowerCapWordInput = wordInput.toLowerCase();
+    /*if (lowerCapWordInput.length > 12) {
+        rowArray.push(['', '', '', '', '', '', '', '', '', '', '', ''])
+    }*/
+
     for (var j = 0; j < lowerCapWordInput.length; j++) {
         // checks for alpha characters
+
         if (!alphabet.includes(lowerCapWordInput[j])) {
             console.log('Input included invalid characters: ' + lowerCapWordInput[j]);
-            break
+            break;
             //throw new Error ("wrong characters")
         } else {
             // converts letter to unicode
             var charCode = lowerCapWordInput[j].charCodeAt(0) - 32;
             // adds letter row to larger row
-            for (var row = 0; row < 12; row++) {
-                rowArray[row] += array[charCode][row]
-            }
+
+            //if (j < 12) {
+                for (var row = 0; row < 12; row++) {
+                    rowArray[row] += array[charCode][row];
+                }
+            //}
+            /*else {
+                for (var row = 0; row < 12; row++) {
+                    rowArray[row+12] += array[charCode][row];
+                }
+            }*/
         }
     }
     // outputs final rows to console
-    for (var row = 0; row < 12; row++) {
-        console.log(rowArray[row])
+    for (var row = 0; row < rowArray.length; row++) {
+        console.log(rowArray[row]);
+
     }
 })
 
@@ -55,12 +69,12 @@ function convertWord(callback) {
             for (var i = 0; i < line.length - 1; i++) {
                 // removes extra @ at the end of each character
                 if ((colNum == 11) && (i == (line.length - 2))) {
-                    cleanedLine += ''
+                    cleanedLine += '';
                     // adds hard spaces when necessary
                 } else if (line[i] == '$') {
-                    cleanedLine += ' '
+                    cleanedLine += ' ';
                 } else {
-                    cleanedLine += line[i]
+                    cleanedLine += line[i];
                 }
             }
 
